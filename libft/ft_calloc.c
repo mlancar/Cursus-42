@@ -6,7 +6,7 @@
 /*   By: malancar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 23:05:11 by malancar          #+#    #+#             */
-/*   Updated: 2022/11/14 15:13:54 by malancar         ###   ########.fr       */
+/*   Updated: 2022/11/23 15:05:56 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*tab;
-	
-	
-	if (size == 0 || nmemb == 0)
+
+	if (size != 0 && nmemb > SIZE_MAX / size)
 		return (NULL);
 	tab = malloc(size * nmemb);
 	if (!tab)
 		return (NULL);
 	ft_bzero(tab, size * nmemb);
-	return(tab);
+	return (tab);
 }
 /*int main()					
 {

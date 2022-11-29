@@ -6,13 +6,13 @@
 /*   By: malancar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:02:08 by malancar          #+#    #+#             */
-/*   Updated: 2022/11/12 19:27:35 by malancar         ###   ########.fr       */
+/*   Updated: 2022/11/18 10:30:09 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strnstr(const char *s1, char *s2, size_t n)
+char	*ft_strnstr(const char *s1, const char *s2, size_t n)
 {
 	size_t	i;
 	size_t	j;
@@ -34,3 +34,13 @@ char	*ft_strnstr(const char *s1, char *s2, size_t n)
 	}
 	return (NULL);
 }
+/*#include <stdio.h>
+int main()
+{
+
+	const char s1[100] = "haystack";
+	char s2[100] = "needle";
+	size_t n = 0;
+
+	printf("%s\n", ft_strnstr(s1, s2, n));
+}*/

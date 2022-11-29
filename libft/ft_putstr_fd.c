@@ -6,7 +6,7 @@
 /*   By: malancar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 18:44:09 by malancar          #+#    #+#             */
-/*   Updated: 2022/11/14 19:17:16 by malancar         ###   ########.fr       */
+/*   Updated: 2022/11/23 14:26:46 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void	ft_putstr_fd(char *s, int fd)
 {
 	int	i;
-	
+
 	i = 0;
+	if (!s)
+		return ;
 	while (s[i])
 	{
 		write(fd, &s[i], 1);

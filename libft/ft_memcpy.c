@@ -6,7 +6,7 @@
 /*   By: malancar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 19:09:51 by malancar          #+#    #+#             */
-/*   Updated: 2022/11/11 21:11:11 by malancar         ###   ########.fr       */
+/*   Updated: 2022/11/16 15:51:07 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	size_t	i;
+	size_t			i;
 	unsigned char	*src1;
 	unsigned char	*dest1;
 

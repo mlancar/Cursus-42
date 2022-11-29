@@ -1,37 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malancar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 15:52:39 by malancar          #+#    #+#             */
-/*   Updated: 2022/11/16 17:00:01 by malancar         ###   ########.fr       */
+/*   Created: 2022/11/25 13:33:54 by malancar          #+#    #+#             */
+/*   Updated: 2022/11/28 17:23:52 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-void	ft_putnbr_fd(int n, int fd)
+int	ft_putstr(char *str)
 {
-	long long int	nb;
+	int	i;
 
-	nb = n;
-	if (nb < 0)
+	i = 0;
+	if (!str)
 	{
-		write(fd, "-", 1);
-		nb = nb * -1;
+		write(1, "(null)", 6);
+		return (6);
 	}
-	if (nb >= 10)
+	while (str[i])
 	{
-		ft_putnbr_fd((nb / 10), fd);
-		ft_putnbr_fd((nb % 10), fd);
+		write(1, &str[i], 1);
+		i++;
 	}
-	else
-		ft_putchar_fd((nb + 48), fd);
+	return (i);
 }
-/*
-int main(void)
-{
-	ft_putnbr_fd(-2147483648, 1);
-}*/

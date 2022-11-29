@@ -6,7 +6,7 @@
 /*   By: malancar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 14:08:47 by malancar          #+#    #+#             */
-/*   Updated: 2022/11/12 20:19:01 by malancar         ###   ########.fr       */
+/*   Updated: 2022/11/16 16:14:47 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "libft.h"
@@ -42,5 +42,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 	char dest[500];
 	char src[500] = "salut";
 
-	printf("ft_memmove = %s\n memmove = %s\n", (char *)ft_memmove(dest, src + 2, 4),(char *) memmove(dest, src + 2, 4));
+	printf("ft_memmove = %s\n memmove = %s\n", i
+		(char *)ft_memmove(dest, src + 2, 4),
+			(char *) memmove(dest, src + 2, 4));
 }*/

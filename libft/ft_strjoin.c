@@ -6,16 +6,16 @@
 /*   By: malancar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 12:34:32 by malancar          #+#    #+#             */
-/*   Updated: 2022/11/15 13:54:43 by malancar         ###   ########.fr       */
+/*   Updated: 2022/11/23 14:11:39 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_strcat(char *src, char *src2, char *s3)
+void	ft_strcat(char *src, char *src2, char *s3)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 0;
@@ -33,20 +33,12 @@ void ft_strcat(char *src, char *src2, char *s3)
 	s3[i] = '\0';
 }
 
-/*#include <stdio.h>	
-int main (int ac, char **av)
-{	
-	(void)ac;
-		printf("%s\n", ft_strcat(av[1], av[2]));
-}
-*/
-char 	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
-	int i;
-	int j;
-	int len;
-
-	char *s3;	
+	int		i;
+	int		j;
+	int		len;
+	char	*s3;	
 
 	if (s1 == NULL || s2 == NULL)
 		return (NULL);

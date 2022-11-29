@@ -1,37 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malancar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 15:52:39 by malancar          #+#    #+#             */
-/*   Updated: 2022/11/16 17:00:01 by malancar         ###   ########.fr       */
+/*   Created: 2022/11/18 14:00:12 by malancar          #+#    #+#             */
+/*   Updated: 2022/11/23 14:25:46 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 {
-	long long int	nb;
+	unsigned int	i;
 
-	nb = n;
-	if (nb < 0)
+	i = 0;
+	if (!s || !f)
+		return ;
+	while (s[i])
 	{
-		write(fd, "-", 1);
-		nb = nb * -1;
+		f(i, &s[i]);
+		i++;
 	}
-	if (nb >= 10)
-	{
-		ft_putnbr_fd((nb / 10), fd);
-		ft_putnbr_fd((nb % 10), fd);
-	}
-	else
-		ft_putchar_fd((nb + 48), fd);
 }
-/*
-int main(void)
+/*void	f(unsigned int i, char *c)
 {
-	ft_putnbr_fd(-2147483648, 1);
+	(void)i;
+	*c = *c - 32;
+}
+int main()
+{
+	char s[] = "salut";
+	ft_striteri(s, f);
+	printf("%s\n", s);
 }*/

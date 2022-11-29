@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   libftprintf.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malancar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 15:52:39 by malancar          #+#    #+#             */
-/*   Updated: 2022/11/16 17:00:01 by malancar         ###   ########.fr       */
+/*   Created: 2022/11/25 12:53:08 by malancar          #+#    #+#             */
+/*   Updated: 2022/11/28 18:34:35 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#ifndef LIBFTPRINTF_H
+# define LIBFTPRINTF_H
 
-void	ft_putnbr_fd(int n, int fd)
-{
-	long long int	nb;
+# include <unistd.h>
+# include <stdarg.h>
 
-	nb = n;
-	if (nb < 0)
-	{
-		write(fd, "-", 1);
-		nb = nb * -1;
-	}
-	if (nb >= 10)
-	{
-		ft_putnbr_fd((nb / 10), fd);
-		ft_putnbr_fd((nb % 10), fd);
-	}
-	else
-		ft_putchar_fd((nb + 48), fd);
-}
-/*
-int main(void)
-{
-	ft_putnbr_fd(-2147483648, 1);
-}*/
+int	ft_printf(const char *format, ...);
+int	ft_putchar(char c);
+int	ft_putstr(char *str);
+int	ft_putnbr(int n);
+int	ft_putunbr(unsigned int n);
+int	ft_puthex(unsigned long int n, char c);
+int	ft_check_format(va_list args, char c);
+int	ft_check_letter(char c);
+#endif

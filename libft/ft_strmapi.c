@@ -1,39 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malancar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/09 16:01:59 by malancar          #+#    #+#             */
-/*   Updated: 2022/11/18 10:08:23 by malancar         ###   ########.fr       */
+/*   Created: 2022/11/16 17:10:01 by malancar          #+#    #+#             */
+/*   Updated: 2022/11/23 14:19:51 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strrchr(const char *str, int c)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int				i;
-	unsigned char	*str2;
+	unsigned int	i;
+	char			*s1;
 
-	str2 = (unsigned char *)str;
-	i = ft_strlen(str);
-	while (i >= 0)
+	i = 0;
+	if (!s || !f)
+		return (NULL);
+	s1 = malloc(sizeof(char) * ft_strlen(s) + 1);
+	if (!s1)
+		return (NULL);
+	while (s[i])
 	{
-		if (str2[i] == (unsigned char)c)
-			return ((char *)&str2[i]);
-		i--;
+		s1[i] = f(i, s[i]);
+		i++;
 	}
-	return (NULL);
+	s1[i] = '\0';
+	return (s1);
 }
-
 /*#include <stdio.h>
-#include <string.h>
-
-int	main(int ac, char ** av)
+char	f(unsigned int i, char c)
 {
-	(void)ac;
-	printf("ft_strrchr : %s\n", ft_strrchr(av[1], av[2][0]));
-	printf("strrchr : %s\n", strrchr(av[1], av[2][0]));
+	(void)i;
+	char	a;
+
+	a = c - 32;
+	return (a);
+}
+int	main()
+{
+	char	*s;
+	s = ft_strmapi("oui", f);
+	printf("%s\n", s);
 }*/

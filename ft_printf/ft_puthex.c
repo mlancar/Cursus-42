@@ -1,37 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_puthex.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malancar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/14 15:52:39 by malancar          #+#    #+#             */
-/*   Updated: 2022/11/16 17:00:01 by malancar         ###   ########.fr       */
+/*   Created: 2022/11/25 16:12:20 by malancar          #+#    #+#             */
+/*   Updated: 2022/11/28 18:34:20 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libftprintf.h"
 
-void	ft_putnbr_fd(int n, int fd)
+int	ft_puthex(unsigned long int n, char c)
 {
-	long long int	nb;
+	int		len;
 
-	nb = n;
-	if (nb < 0)
-	{
-		write(fd, "-", 1);
-		nb = nb * -1;
-	}
-	if (nb >= 10)
-	{
-		ft_putnbr_fd((nb / 10), fd);
-		ft_putnbr_fd((nb % 10), fd);
-	}
+	len = 0;
+	if (n >= 16)
+		len = len + ft_puthex((n / 16), c);
+	if (n % 16 < 10)
+		len = len + ft_putchar((n % 16) + 48);
 	else
-		ft_putchar_fd((nb + 48), fd);
+	{
+		if (c == 'X')
+			len = len + ft_putchar((n % 16) + 'A' - 10);
+		else
+			len = len + ft_putchar((n % 16) + 'a' - 10);
+	}
+	return (len);
 }
-/*
-int main(void)
-{
-	ft_putnbr_fd(-2147483648, 1);
-}*/
