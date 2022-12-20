@@ -6,7 +6,7 @@
 /*   By: malancar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:51:40 by malancar          #+#    #+#             */
-/*   Updated: 2022/12/19 12:51:19 by malancar         ###   ########.fr       */
+/*   Updated: 2022/12/20 18:54:43 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,30 +20,33 @@ char	*get_next_line(int fd)
 	char	*line;
 	char	*buf;
 	char	*tmp;
-
+	
 	line = NULL;
+	n = -1;
 	while (42)
 	{
+		if (save)
+			n = ft_strchr(save, '\n');
+		if (n >= 0)
+		{
+			line = ft_substr(save, 0, n + 1);
+			tmp = ft_substr(&save[n + 1], 0, ft_strlen(&save[n + 1]));
+			//free(save);
+			//free(buf);
+			save = tmp;
+			return (line);
+		}	
 		buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
 		if (!buf)
 			return (NULL);
 		r = read(fd, buf, BUFFER_SIZE);
 		buf[r] = '\0';
 		if (save)
-			buf = ft_strjoin(&save, buf);
-		n = ft_strchr(buf, '\n');
-		if (n >= 0)
-		{
-			line = ft_substr(buf, 0, n + 1);
-			tmp = ft_substr(&buf[n + 1], 0, ft_strlen(&buf[n + 1]));
-			free(save);
-			free(buf);
-			save = tmp;
-			return (line);
-		}	
+			save = ft_strjoin(save, buf);
+		else
+			save = buf;
 		if (r <= 0 || r < BUFFER_SIZE)
-			return(ft_strdup(save));
-		save = buf;
+			return(ft_strdup(&save));
 	}
 	return (line);
 }
@@ -62,10 +65,10 @@ int		main()
 	//int i = 0;
 
 
-	fd = open("txt.txt", O_RDONLY);
+	fd = open("bible.txt", O_RDONLY);
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		printf("%s", line);
+		printf("amen : %s", line);
 		free(line);
 		//i++;
 		//printf("%d\n", i);

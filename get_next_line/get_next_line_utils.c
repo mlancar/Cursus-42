@@ -6,7 +6,7 @@
 /*   By: malancar <malancar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 12:13:39 by malancar          #+#    #+#             */
-/*   Updated: 2022/12/19 12:38:13 by malancar         ###   ########.fr       */
+/*   Updated: 2022/12/20 18:14:39 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,23 @@ void	ft_strcat(char *src, char *src2, char *s3)
 	s3[i] = '\0';
 }
 
-char	*ft_strjoin(char **s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		j;
 	int		len;
 	char	*s3;
 
-	if (*s1 == NULL || s2 == NULL)
+	if (s1 == NULL || s2 == NULL)
 		return (NULL);
-	i = ft_strlen(*s1);
+	i = ft_strlen(s1);
 	j = ft_strlen(s2);
 	len = i + j;
 	s3 = malloc(sizeof(char) * (len + 1));
 	if (!s3)
 		return (0);
-	ft_strcat(*s1, s2, s3);
-	free(*s1);
-	*s1 = NULL;
-	free(s2);
-	s2 = NULL;
+	ft_strcat(s1, s2, s3);
+	free(s1);
 	free(s2);
 	return (s3);
 }
@@ -89,6 +86,8 @@ char	*ft_substr(char	*s, int start, int len)
 	if (start >= ft_strlen(s))
 	{
 		s2 = malloc(sizeof(char) * 1);
+		if (!s2)
+			return (NULL);
 		s2[i] = '\0';
 		return (s2);
 	}
@@ -106,26 +105,29 @@ char	*ft_substr(char	*s, int start, int len)
 	return (s2);
 }
 
-char	*ft_strdup(char *s)
+char	*ft_strdup(char **s)
 {
 	char	*s1;
 	int		i;
 
-	if (!s)
+	if (!*s)
 		return (NULL);
-	if (s == 0)
+	if (**s == 0)
 	{
-		free(s);
-		s = NULL;
+		free(*s);
+		*s = NULL;
 		return (NULL);
 	}
-	i = ft_strlen(s);
-	s1 = malloc(sizeof(char) * (i + 1));
-	if (!s1)
-		return (NULL);
-	ft_memmove(s1, s, i);
-	free(s);
-	s = NULL;
+	if (*s)
+	{
+		i = ft_strlen(*s);
+		s1 = malloc(sizeof(char) * (i + 1));
+		if (!s1)
+			return (NULL);
+	}
+	ft_memmove(s1, *s, i);
+	free(*s);
+	*s = NULL;
 	s1[i] = '\0';
 	return (s1);
 }
