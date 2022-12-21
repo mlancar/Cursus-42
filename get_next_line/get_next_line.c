@@ -6,7 +6,7 @@
 /*   By: malancar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:51:40 by malancar          #+#    #+#             */
-/*   Updated: 2022/12/20 18:54:43 by malancar         ###   ########.fr       */
+/*   Updated: 2022/12/21 17:01:23 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ char	*get_next_line(int fd)
 	char	*tmp;
 	
 	line = NULL;
+	buf = NULL;
 	n = -1;
 	while (42)
 	{
@@ -31,8 +32,8 @@ char	*get_next_line(int fd)
 		{
 			line = ft_substr(save, 0, n + 1);
 			tmp = ft_substr(&save[n + 1], 0, ft_strlen(&save[n + 1]));
-			//free(save);
-			//free(buf);
+			free(save);
+			free(buf);
 			save = tmp;
 			return (line);
 		}	
@@ -42,7 +43,9 @@ char	*get_next_line(int fd)
 		r = read(fd, buf, BUFFER_SIZE);
 		buf[r] = '\0';
 		if (save)
-			save = ft_strjoin(save, buf);
+		{	save = ft_strjoin(save, buf);
+			buf = NULL;
+		}
 		else
 			save = buf;
 		if (r <= 0 || r < BUFFER_SIZE)
@@ -65,7 +68,7 @@ int		main()
 	//int i = 0;
 
 
-	fd = open("bible.txt", O_RDONLY);
+	fd = open("text.txt", O_RDONLY);
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		printf("amen : %s", line);
