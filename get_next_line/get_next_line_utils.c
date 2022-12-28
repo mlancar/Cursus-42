@@ -6,7 +6,7 @@
 /*   By: malancar <malancar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 12:13:39 by malancar          #+#    #+#             */
-/*   Updated: 2022/12/20 18:14:39 by malancar         ###   ########.fr       */
+/*   Updated: 2022/12/28 16:10:49 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		len;
 	char	*s3;
 
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
 	i = ft_strlen(s1);
 	j = ft_strlen(s2);
 	len = i + j;
@@ -73,7 +71,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	if (!s3)
 		return (0);
 	ft_strcat(s1, s2, s3);
-	free(s1);
+	//free(s1);
 	free(s2);
 	return (s3);
 }

@@ -6,14 +6,14 @@
 /*   By: malancar <malancar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:53:41 by malancar          #+#    #+#             */
-/*   Updated: 2022/12/20 16:11:03 by malancar         ###   ########.fr       */
+/*   Updated: 2022/12/21 16:57:46 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 1
 # endif
 # include <stdlib.h>
 # include <unistd.h>

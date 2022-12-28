@@ -6,12 +6,13 @@
 /*   By: malancar <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:51:40 by malancar          #+#    #+#             */
-/*   Updated: 2022/12/21 17:01:23 by malancar         ###   ########.fr       */
+/*   Updated: 2022/12/28 18:50:18 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
+
 char	*get_next_line(int fd)
 {
 	int		r;
@@ -22,8 +23,15 @@ char	*get_next_line(int fd)
 	char	*tmp;
 	
 	line = NULL;
-	buf = NULL;
+	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!buf)
+		return (NULL);
+	save = malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if (!save)
+		return (NULL);
+	save = NULL;
 	n = -1;
+
 	while (42)
 	{
 		if (save)
@@ -33,23 +41,30 @@ char	*get_next_line(int fd)
 			line = ft_substr(save, 0, n + 1);
 			tmp = ft_substr(&save[n + 1], 0, ft_strlen(&save[n + 1]));
 			free(save);
-			free(buf);
 			save = tmp;
 			return (line);
 		}	
-		buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
-		if (!buf)
-			return (NULL);
 		r = read(fd, buf, BUFFER_SIZE);
+		if (r == -1)
+		{
+			free(buf);
+			return (NULL);
+		}
 		buf[r] = '\0';
 		if (save)
-		{	save = ft_strjoin(save, buf);
-			buf = NULL;
-		}
-		else
-			save = buf;
-		if (r <= 0 || r < BUFFER_SIZE)
+			save = ft_strjoin(save, buf);
+		if (n > 0)
+			return (ft_strdup(&save));
+		if (r == 0 || r < BUFFER_SIZE)
+		{
+			if (!buf)
+				free(buf);
+			if (!save)
+				save = buf;
 			return(ft_strdup(&save));
+		}
+		if (!save && buf)
+			save = buf;
 	}
 	return (line);
 }
@@ -65,16 +80,16 @@ int		main()
 {
 	int	fd;
 	char *line;
-	//int i = 0;
+	int i = 0;
 
 
 	fd = open("text.txt", O_RDONLY);
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		printf("amen : %s", line);
+		printf("%s", line);
 		free(line);
-		//i++;
-		//printf("%d\n", i);
+		i++;
+		printf("%d\n", i);
 	}
 	return (0);
 }
