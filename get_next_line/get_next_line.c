@@ -3,35 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: malancar <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: malancar <malancar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/02 12:51:40 by malancar          #+#    #+#             */
-/*   Updated: 2022/12/28 18:50:18 by malancar         ###   ########.fr       */
+/*   Updated: 2022/12/31 16:49:37 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
+
+void	ft_check(char **save, char *buf)
+{
+	if (*save)
+			*save = ft_strjoin(*save, buf);
+	if (!*save)
+		*save = buf;
+}
 
 char	*get_next_line(int fd)
 {
-	int		r;
-	int		n;
 	static char		*save;
-	char	*line;
-	char	*buf;
-	char	*tmp;
-	
-	line = NULL;
-	buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (!buf)
-		return (NULL);
-	save = malloc(sizeof(char) * BUFFER_SIZE + 1);
-	if (!save)
-		return (NULL);
-	save = NULL;
-	n = -1;
+	int				r;
+	int				n;
+	char			*line;
+	char			*buf;
+	char			*tmp;
 
+	line = NULL;
+	n = -1;
 	while (42)
 	{
 		if (save)
@@ -44,31 +43,19 @@ char	*get_next_line(int fd)
 			save = tmp;
 			return (line);
 		}	
-		r = read(fd, buf, BUFFER_SIZE);
-		if (r == -1)
-		{
-			free(buf);
+		buf = malloc(sizeof(char) * BUFFER_SIZE + 1);
+		if (!buf)
 			return (NULL);
-		}
-		buf[r] = '\0';
-		if (save)
-			save = ft_strjoin(save, buf);
-		if (n > 0)
+		r = read(fd, buf, BUFFER_SIZE);
+		if (r >= 0)
+			buf[r] = '\0';
+		ft_check(&save, buf);
+		if ((r <= 0 || r < BUFFER_SIZE) && ft_strchr(save, '\n') == -1)
 			return (ft_strdup(&save));
-		if (r == 0 || r < BUFFER_SIZE)
-		{
-			if (!buf)
-				free(buf);
-			if (!save)
-				save = buf;
-			return(ft_strdup(&save));
-		}
-		if (!save && buf)
-			save = buf;
 	}
 	return (line);
 }
-#include <stddef.h>
+/*#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
@@ -80,16 +67,16 @@ int		main()
 {
 	int	fd;
 	char *line;
-	int i = 0;
-
-
+	
 	fd = open("text.txt", O_RDONLY);
+	
+	int i = 0;
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		printf("%s", line);
+		printf("res = %s", line);
 		free(line);
 		i++;
 		printf("%d\n", i);
 	}
 	return (0);
-}
+}*/
