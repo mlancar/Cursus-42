@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: malancar <malancar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/02 12:53:41 by malancar          #+#    #+#             */
-/*   Updated: 2023/01/02 15:37:58 by malancar         ###   ########.fr       */
+/*   Created: 2023/01/02 15:58:22 by malancar          #+#    #+#             */
+/*   Updated: 2023/01/05 15:43:55 by malancar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H 
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 2
 # endif
